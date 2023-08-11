@@ -5,6 +5,7 @@ from django.db import models
 
 
 class Personne(models.Model):
+    personneID = models.AutoField(primary_key=True)
     nom = models.CharField(max_length=200)
     prenom = models.CharField(max_length=200)
     sexe = models.CharField(choices=[('M', 'masculin'), ('F', 'féminin')], max_length=1)
@@ -14,11 +15,13 @@ class Personne(models.Model):
 
 
 class Patient(Personne):
+    patientID = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     date_accueil = models.DateTimeField(auto_now=True)
     contact = models.CharField(max_length=9, null=True)
 
 
 class Agent(Personne):
+    agentID = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     matricule = models.CharField(max_length=6, null=True)
 
 
@@ -38,6 +41,7 @@ class Imagerie(models.Model):
 
 
 class Resultats(models.Model):
+    id = models.AutoField(primary_key=True)
     image = models.ForeignKey(Imagerie, on_delete=models.CASCADE)
     interpreteur = models.ForeignKey(Agent, on_delete=models.CASCADE)
     result = models.TextField()

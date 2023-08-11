@@ -21,5 +21,6 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('image_app.urls')),
+    path('dgfs/api/imagerie/', include('image_app.urls')),
+    path('dgfs/api/', include('main.routers')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
